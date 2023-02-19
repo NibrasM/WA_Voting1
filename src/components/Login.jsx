@@ -3,7 +3,9 @@ import { useCookies } from "react-cookie";
 import Admin from "./Admin";
 import Logout from "./Logout";
 import Voting from "./Voting";
+import "./Login.css";
 import usePhoto from "./../assets/user.png";
+import voteImg from "./../assets/vote.png";
 function Login() {
   const users = [
     {
@@ -225,10 +227,6 @@ function Login() {
     },
   ];
 
-  //to set a new key in object user (isVotted)
-  // users.forEach((user) => {
-  //   user.isVoted = false;
-  // });
   //to know which user logged in
   const [cookies, setCookie] = useCookies(["isLoggedIn"]);
   const [isLogged, setIsLogged] = useState(cookies.isLoggedIn === "ture");
@@ -274,35 +272,40 @@ function Login() {
   };
 
   return !isLogged ? (
-    <div>
+    <div className="page-container">
+      <div className="img-container">
+        <img className="vote" src={voteImg}></img>
+      </div>
       <form className="login-form" onSubmit={loginHandler}>
-        <img src={usePhoto} />
-        <label>
-          UserName:{" "}
-          <input
-            type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </label>
-        <label>
-          Password:{" "}
-          <input
-            type="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-        </label>
-        <button>Log In</button>
+        <h1>Log In</h1>
+        <label className="label-feild">Email </label>
+        <input
+          className="input-feild"
+          placeholder="Enter your email"
+          type="email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+
+        <label className="label-feild">Password </label>
+        <input
+          className="input-feild"
+          placeholder="Enter your password"
+          type="password"
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
+
+        <button className="login-btn">Log In</button>
       </form>
     </div>
   ) : (
     <div>
       <Voting logIn={setIsLogged} username={loggedUser.name}></Voting>
       <Admin usersArray={users}></Admin>
-      <Logout logIn={setIsLogged}></Logout>;
+      <Logout logIn={setIsLogged}></Logout>
     </div>
   );
 }

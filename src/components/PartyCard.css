@@ -1,0 +1,4 @@
+.party-container {
+  display: flex;
+  flex-direction: column;
+}

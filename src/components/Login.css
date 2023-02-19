@@ -1,0 +1,70 @@
+.page-container {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(240, 41, 41),
+    white,
+    rgb(61, 80, 147)
+  );
+  padding: 8vh 5vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  width: 89vw;
+}
+h1 {
+  color: rgb(61, 80, 147);
+}
+.img-container {
+  width: 30vw;
+  height: 80vh;
+  padding-left: 3%;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.vote {
+  margin-top: 30vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 3vh;
+  height: 75vh;
+  width: 30vw;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 2.5vh 1vw;
+  background-color: white;
+}
+.user-img {
+  width: 10vw;
+  height: 20vh;
+  border-radius: 10%;
+  border: 3px solid rgb(61, 80, 147);
+}
+
+.login-btn {
+  width: 10vw;
+  background-color: rgb(61, 80, 147);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 1vw;
+  margin-left: 30%;
+}
+
+.input-feild {
+  width: 20vw;
+  height: 5vh;
+  border-radius: 5px;
+  border: none;
+  border-bottom: 2px solid rgb(255, 199, 181);
+  padding: 1vh 2vw;
+}
+.label-feild {
+  color: rgb(61, 80, 147);
+}

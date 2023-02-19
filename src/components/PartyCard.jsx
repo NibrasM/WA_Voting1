@@ -1,3 +1,5 @@
+import "./PartyCard.css";
+
 export default function PartyCard({
   party,
   parties,
@@ -16,10 +18,10 @@ export default function PartyCard({
   };
 
   return (
-    <div>
-      <p>{party.name}</p>
-      <label>{party.votes}</label>
-      <button onClick={vote} disabled={disabled}>
+    <div className="party-container">
+      <p className="party-name">{party.name}</p>
+      <label className="party-votes">{party.votes}</label>
+      <button className="vote-btn" onClick={vote} disabled={disabled}>
         Vote
       </button>
     </div>
