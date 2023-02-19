@@ -27,7 +27,7 @@ export default function Admin() {
       <h1>Total Votes= {total} </h1>
       <h1>Stats= {stats}% </h1>
 
-      <table>
+      {/* <table>
         <tr>
           <th>Name</th>
           <th>Email</th>
@@ -48,7 +48,7 @@ export default function Admin() {
             </tr>
           );
         })}
-      </table>
+      </table> */}
     </div>
   );
 }
