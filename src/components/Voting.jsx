@@ -3,32 +3,38 @@ import { useState } from "react";
 import PartyCard from "./PartyCard";
 import { useCookies } from "react-cookie";
 import Logout from "./Logout";
-
+import "./Voting.css";
+import Admin from "./Admin";
 const parties = [
   {
-    name: "dog",
-    votes: 0,
+    name: "A",
+    votes: 210,
+    img: "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_A_blue-512.png",
   },
   {
-    name: "cat",
-    votes: 0,
+    name: "B",
+    votes: 118,
+    img: "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_B_blue-512.png",
   },
   {
-    name: "cow",
-    votes: 0,
+    name: "C",
+    votes: 500,
+    img: "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_C_blue-512.png",
   },
   {
-    name: "lion",
-    votes: 0,
+    name: "D",
+    votes: 350,
+    img: "https://cdn3.iconfinder.com/data/icons/letters-and-numbers-1/32/letter_D_blue-512.png",
   },
 ];
 
-export default function Voting({ logIn, username }) {
+export default function Voting() {
   const [partiesArray, setPartiesArray] = useState(parties);
-  const [selectedParty, setSelectedParty] = useState();
+  const [selectedParty, setSelectedParty] = useState(null);
   const [isVoted, setIsVoted] = useState(false);
   const [cookies, setCookie] = useCookies(["loggedInUser"]);
   const [changed, setChanged] = useState(false);
+  const [isDone, setIsDone] = useState(false);
 
   const users = JSON.parse(localStorage.getItem("users"));
   const loggedInUser = cookies.loggedInUser;
@@ -50,13 +56,6 @@ export default function Voting({ logIn, username }) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const storedData = localStorage.getItem("users");
-  //   if (storedData) {
-  //     setUsersData(JSON.parse(storedData));
-  //   }
-  // }, []);
-
   const done = () => {
     localStorage.setItem("parties", JSON.stringify(partiesArray));
     const users = JSON.parse(localStorage.getItem("users"));
@@ -67,13 +66,19 @@ export default function Voting({ logIn, username }) {
       localStorage.setItem("users", JSON.stringify(users));
       setIsVoted(true);
       setChanged(false);
+      setSelectedParty(null);
+      setIsDone(true);
     }
   };
 
   const change = () => {
+    console.log("change clicked");
     if (isVoted) {
       setChanged(true);
+      console.log("change yes");
     } else if (selectedParty && !changed) {
+      console.log("change no");
+
       const partiesCopy = [...partiesArray];
       const foundParty = partiesCopy.find(
         (currentParty) => currentParty.name === selectedParty
@@ -90,27 +95,56 @@ export default function Voting({ logIn, username }) {
     }
   };
 
-  return (
+  return loggedInUser.type === "admin" && isVoted ? (
     <div>
-      <label>LoggedIn {username}</label>
-      {partiesArray.map((party) => {
-        return (
-          <PartyCard
-            key={party.name}
-            party={party}
-            parties={partiesArray}
-            setParties={setPartiesArray}
-            setSelectedParty={setSelectedParty}
-            disabled={isVoted || changed}
-          ></PartyCard>
-        );
-      })}
-      <button onClick={done} disabled={isVoted}>
-        done
-      </button>
-      <button onClick={change} disabled={!isVoted}>
-        change
-      </button>
+      <h1 className="thank-msg"> Thank you for voting {loggedInUser.name} </h1>
+      <Admin usersArray={users}></Admin>
+    </div>
+  ) : !isVoted ? (
+    <div className="voting-page-container">
+      <div className="parties-container">
+        {partiesArray.map((party) => {
+          return (
+            <PartyCard
+              key={party.name}
+              party={party}
+              parties={partiesArray}
+              setParties={setPartiesArray}
+              setSelectedParty={setSelectedParty}
+              disabled={(isVoted && !changed) || selectedParty}
+            ></PartyCard>
+          );
+        })}
+      </div>
+      <div>
+        <button
+          className="done-btn"
+          onClick={done}
+          disabled={isVoted && !(changed && selectedParty)}
+          style={{
+            backgroundColor: isVoted
+              ? "rgb(153, 158, 175)"
+              : "rgb(61, 80, 147)",
+          }}
+        >
+          Done
+        </button>
+        <button
+          className="change-btn"
+          onClick={change}
+          disabled={!isVoted || changed}
+          style={{
+            backgroundColor:
+              !isVoted || changed ? "rgb(153, 158, 175)" : "rgb(61, 80, 147)",
+          }}
+        >
+          Change
+        </button>
+      </div>
+    </div>
+  ) : (
+    <div className="thanks">
+      <h1 className="thank-msg"> Thank you for voting {loggedInUser.name} </h1>
     </div>
   );
 }

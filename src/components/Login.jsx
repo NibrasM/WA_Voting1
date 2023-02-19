@@ -303,9 +303,8 @@ function Login() {
     </div>
   ) : (
     <div>
-      <Voting logIn={setIsLogged} username={loggedUser.name}></Voting>
-      <Admin usersArray={users}></Admin>
-      <Logout logIn={setIsLogged}></Logout>
+      <Logout logIn={setIsLogged} username={loggedUser.name}></Logout>
+      <Voting></Voting>
     </div>
   );
 }

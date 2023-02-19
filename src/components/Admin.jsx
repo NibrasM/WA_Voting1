@@ -1,6 +1,6 @@
 import { useTable } from "react-table";
 import { useState, useEffect } from "react";
-
+import "./Admin.css";
 export default function Admin() {
   const [usersData, setUsersData] = useState([]);
 
@@ -23,12 +23,13 @@ export default function Admin() {
   console.log(total);
 
   return (
-    <div className="App">
-      <h1>Total Votes= {total} </h1>
-      <h1>Stats= {stats}% </h1>
-
-      <table>
-        <tr>
+    <div className="admin-page">
+      <div className="stats-div">
+        <h1>Total Votes= {total} </h1>
+        <h1>Stats= {stats}% </h1>
+      </div>
+      <table className="data-table">
+        <tr className="table-header">
           <th>Name</th>
           <th>Email</th>
           <th>Did Vote</th>
@@ -36,15 +37,15 @@ export default function Admin() {
         {usersData.map((val) => {
           return val.isVoted ? (
             <tr key={val.name}>
-              <td style={{ color: "green" }}>{val.name}</td>
-              <td style={{ color: "green" }}>{val.email}</td>
-              <td style={{ color: "green" }}>{val.isVoted.toString()}</td>
+              <td className="isVoted">{val.name}</td>
+              <td className="isVoted">{val.email}</td>
+              <td className="isVoted">{val.isVoted.toString()}</td>
             </tr>
           ) : (
             <tr>
-              <td style={{ color: "red" }}>{val.name}</td>
-              <td style={{ color: "red" }}>{val.email}</td>
-              <td style={{ color: "red" }}>{val.isVoted.toString()}</td>
+              <td className="notVoted">{val.name}</td>
+              <td className="notVoted">{val.email}</td>
+              <td className="notVoted">{val.isVoted.toString()}</td>
             </tr>
           );
         })}

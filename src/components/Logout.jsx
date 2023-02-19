@@ -1,14 +1,20 @@
 import { useCookies } from "react-cookie";
+import "./Logout.css";
+export default function Logout({ logIn, username }) {
+  // const users = JSON.parse(localStorage.getItem("users"));
+  // const foundUser = users.find((user) => user.name === username);
 
-export default function Logout({ logIn }) {
   const handelLogOut = (e) => {
     e.preventDefault();
     logIn(false);
   };
   return (
-    <div>
-      <p>Thank you for voting</p>
-      <button onClick={handelLogOut}>Log out</button>
+    <div className="logout-page">
+      <h2 className="username"> {username}</h2>
+
+      <button className="logout-btn" onClick={handelLogOut}>
+        Log out
+      </button>
     </div>
   );
 }

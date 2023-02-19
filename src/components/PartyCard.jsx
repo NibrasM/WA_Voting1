@@ -16,12 +16,19 @@ export default function PartyCard({
     setParties(partiesCopy);
     setSelectedParty(foundParty.name);
   };
-
   return (
     <div className="party-container">
+      <img src={party.img}></img>
       <p className="party-name">{party.name}</p>
       <label className="party-votes">{party.votes}</label>
-      <button className="vote-btn" onClick={vote} disabled={disabled}>
+      <button
+        className="vote-btn"
+        onClick={vote}
+        disabled={disabled}
+        style={{
+          backgroundColor: disabled ? "rgb(153, 158, 175)" : "rgb(61, 80, 147)",
+        }}
+      >
         Vote
       </button>
     </div>
