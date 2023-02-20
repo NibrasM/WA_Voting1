@@ -6,6 +6,8 @@ export default function PartyCard({
   setParties,
   setSelectedParty,
   disabled,
+  setChangeToDisable,
+  setIsVoted,
 }) {
   const vote = () => {
     const partiesCopy = [...parties];
@@ -15,6 +17,8 @@ export default function PartyCard({
     foundParty.votes = foundParty.votes + 1;
     setParties(partiesCopy);
     setSelectedParty(foundParty.name);
+    setChangeToDisable(false);
+    setIsVoted(true);
   };
   return (
     <div className="party-container">

@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
-import Admin from "./Admin";
 import Logout from "./Logout";
 import Voting from "./Voting";
 import "./Login.css";
-import usePhoto from "./../assets/user.png";
 import voteImg from "./../assets/vote.png";
 function Login() {
   const users = [
@@ -230,24 +228,9 @@ function Login() {
   //to know which user logged in
   const [cookies, setCookie] = useCookies(["isLoggedIn"]);
   const [isLogged, setIsLogged] = useState(cookies.isLoggedIn === "ture");
-
   const [usersData, setUsersData] = useState(users);
-
-  useEffect(() => {
-    const storedData = localStorage.getItem("users");
-    if (storedData) {
-      setUsersData(JSON.parse(storedData));
-    } else localStorage.setItem("users", JSON.stringify(users));
-    setIsLogged(cookies.isLoggedIn == "true");
-  }, []);
-
-  useEffect(() => {
-    setCookie("isLoggedIn", isLogged, { path: "/" });
-  }, [isLogged]);
-
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
   const [loggedUser, setLoggedUser] = useState({
     name: "",
     password: "",
@@ -255,6 +238,19 @@ function Login() {
     email: "",
     isVoted: false,
   });
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("users");
+    if (storedData) {
+      setUsersData(JSON.parse(storedData));
+    } else localStorage.setItem("users", JSON.stringify(users));
+    setIsLogged(cookies.isLoggedIn == "true");
+    setLoggedUser(cookies.loggedInUser);
+  }, []);
+
+  useEffect(() => {
+    setCookie("isLoggedIn", isLogged, { path: "/" });
+  }, [isLogged]);
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -264,6 +260,7 @@ function Login() {
 
     if (foundUser) {
       setLoggedUser(foundUser);
+      localStorage.setItem("loggedInFoundUser", JSON.stringify(foundUser));
       setCookie("isLoggedIn", true, { path: "/" });
       setCookie("loggedInUser", foundUser, { path: "/" });
 

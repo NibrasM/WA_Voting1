@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PartyCard from "./PartyCard";
 import { useCookies } from "react-cookie";
-import Logout from "./Logout";
 import "./Voting.css";
 import Admin from "./Admin";
 const parties = [
@@ -33,12 +31,12 @@ export default function Voting() {
   const [selectedParty, setSelectedParty] = useState(null);
   const [isVoted, setIsVoted] = useState(false);
   const [cookies, setCookie] = useCookies(["loggedInUser"]);
-  const [changed, setChanged] = useState(false);
   const [isDone, setIsDone] = useState(false);
-
   const users = JSON.parse(localStorage.getItem("users"));
   const loggedInUser = cookies.loggedInUser;
   const foundUser = users.find((user) => user.name === loggedInUser.name);
+
+  const [changeToDisable, setChangeToDisable] = useState(true);
 
   useEffect(() => {
     const pariesData = localStorage.getItem("parties");
@@ -51,8 +49,9 @@ export default function Voting() {
     const loggedInUser = cookies.loggedInUser;
     if (users && loggedInUser) {
       const foundUser = users.find((user) => user.name === loggedInUser.name);
-
+      console.log("logged user is votted " + foundUser.isVoted);
       setIsVoted(foundUser.isVoted);
+      setIsDone(foundUser.isVoted);
     }
   }, []);
 
@@ -65,20 +64,13 @@ export default function Voting() {
       foundUser.isVoted = true;
       localStorage.setItem("users", JSON.stringify(users));
       setIsVoted(true);
-      setChanged(false);
       setSelectedParty(null);
       setIsDone(true);
     }
   };
 
   const change = () => {
-    console.log("change clicked");
-    if (isVoted) {
-      setChanged(true);
-      console.log("change yes");
-    } else if (selectedParty && !changed) {
-      console.log("change no");
-
+    if (isVoted && selectedParty) {
       const partiesCopy = [...partiesArray];
       const foundParty = partiesCopy.find(
         (currentParty) => currentParty.name === selectedParty
@@ -89,18 +81,19 @@ export default function Voting() {
         const foundUser = users.find((user) => user.name === loggedInUser.name);
         foundUser.isVoted = false;
         localStorage.setItem("users", JSON.stringify(users));
+        setSelectedParty(null);
         setIsVoted(false);
-        setChanged(true);
+        setChangeToDisable(false);
       }
     }
   };
 
-  return loggedInUser.type === "admin" && isVoted ? (
+  return loggedInUser.type === "admin" && isDone ? (
     <div>
       <h1 className="thank-msg"> Thank you for voting {loggedInUser.name} </h1>
       <Admin usersArray={users}></Admin>
     </div>
-  ) : !isVoted ? (
+  ) : !isDone ? (
     <div className="voting-page-container">
       <div className="parties-container">
         {partiesArray.map((party) => {
@@ -111,7 +104,9 @@ export default function Voting() {
               parties={partiesArray}
               setParties={setPartiesArray}
               setSelectedParty={setSelectedParty}
-              disabled={(isVoted && !changed) || selectedParty}
+              disabled={(isVoted && changeToDisable) || selectedParty}
+              setChangeToDisable={setChangeToDisable}
+              setIsVoted={setIsVoted}
             ></PartyCard>
           );
         })}
@@ -120,9 +115,9 @@ export default function Voting() {
         <button
           className="done-btn"
           onClick={done}
-          disabled={isVoted && !(changed && selectedParty)}
+          disabled={isVoted && !selectedParty}
           style={{
-            backgroundColor: isVoted
+            backgroundColor: !isVoted
               ? "rgb(153, 158, 175)"
               : "rgb(61, 80, 147)",
           }}
@@ -132,10 +127,11 @@ export default function Voting() {
         <button
           className="change-btn"
           onClick={change}
-          disabled={!isVoted || changed}
+          disabled={changeToDisable}
           style={{
-            backgroundColor:
-              !isVoted || changed ? "rgb(153, 158, 175)" : "rgb(61, 80, 147)",
+            backgroundColor: changeToDisable
+              ? "rgb(153, 158, 175)"
+              : "rgb(61, 80, 147)",
           }}
         >
           Change

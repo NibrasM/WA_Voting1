@@ -9,6 +9,7 @@ export default function Admin() {
     if (storedData) {
       setUsersData(JSON.parse(storedData));
     }
+    console.log(storedData);
   }, []);
 
   let total = 0;
@@ -20,7 +21,6 @@ export default function Admin() {
   });
   stats = (total / usersData.length) * 100;
   stats = Math.round(stats * 10) / 10;
-  console.log(total);
 
   return (
     <div className="admin-page">

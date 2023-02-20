@@ -1,9 +1,10 @@
-import { useCookies } from "react-cookie";
+import { useState } from "react";
 import "./Logout.css";
 export default function Logout({ logIn, username }) {
-  // const users = JSON.parse(localStorage.getItem("users"));
-  // const foundUser = users.find((user) => user.name === username);
+  // const LoggedUser = localStorage.getItem("loggedInFoundUser");
+  // const [user, setUser] = useState(JSON.parse(LoggedUser));
 
+  // console.log(user.name);
   const handelLogOut = (e) => {
     e.preventDefault();
     logIn(false);
