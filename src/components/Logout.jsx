@@ -11,8 +11,7 @@ export default function Logout({ logIn, username }) {
   };
   return (
     <div className="logout-page">
-      <h2 className="username"> {username}</h2>
-
+      <h3 className="username"> {username}</h3>
       <button className="logout-btn" onClick={handelLogOut}>
         Log out
       </button>

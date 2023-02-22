@@ -274,7 +274,7 @@ function Login() {
         <img className="vote" src={voteImg}></img>
       </div>
       <form className="login-form" onSubmit={loginHandler}>
-        <h1>Log In</h1>
+        <h1 className="login-title">Log In</h1>
         <label className="label-feild">Email </label>
         <input
           className="input-feild"

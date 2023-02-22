@@ -25,8 +25,8 @@ export default function Admin() {
   return (
     <div className="admin-page">
       <div className="stats-div">
-        <h1>Total Votes= {total} </h1>
-        <h1>Stats= {stats}% </h1>
+        <h3>Total Votes= {total} </h3>
+        <h3>Stats= {stats}% </h3>
       </div>
       <table className="data-table">
         <tr className="table-header">

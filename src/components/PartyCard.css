@@ -27,3 +27,47 @@
   border-radius: 10px;
   padding: 1vw;
 }
+
+@media (max-width: 500px) {
+  .party-container {
+    flex-direction: row;
+    width: 50vw;
+  }
+  .vote-btn {
+    font-size: 20px;
+    width: 20vw;
+  }
+  .party-name,
+  .party-votes {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 600px) and (min-width: 501px) {
+  .party-container {
+    flex-direction: row;
+    width: 60vw;
+  }
+  .vote-btn {
+    font-size: 30px;
+    width: 20vw;
+  }
+  .party-name,
+  .party-votes {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 800px) and (min-width: 601px) {
+  .party-container {
+    width: 20vw;
+  }
+  .vote-btn {
+    font-size: 20px;
+    width: 20vw;
+  }
+  .party-name,
+  .party-votes {
+    font-size: 20px;
+  }
+}

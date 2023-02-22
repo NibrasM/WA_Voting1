@@ -11,7 +11,7 @@
   justify-content: center;
   width: 89vw;
 }
-h1 {
+.login-title {
   color: rgb(61, 80, 147);
 }
 .img-container {
@@ -54,7 +54,7 @@ h1 {
   border: none;
   border-radius: 10px;
   padding: 1vw;
-  margin-left: 30%;
+  margin-left: 50%;
 }
 
 .input-feild {
@@ -64,7 +64,111 @@ h1 {
   border: none;
   border-bottom: 2px solid rgb(255, 199, 181);
   padding: 1vh 2vw;
+  font-size: 15px;
 }
 .label-feild {
   color: rgb(61, 80, 147);
+}
+
+@media (max-width: 500px) {
+  .page-container {
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-image: green;
+    align-items: center;
+  }
+  .login-form {
+    border-radius: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 71vw;
+    height: 60vh;
+    align-items: center;
+  }
+  .login-title {
+    font-size: 25px;
+    text-align: center;
+  }
+  .label-feild {
+    font-size: 16px;
+    text-align: center;
+  }
+  .input-feild {
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  .login-btn {
+    font-size: 20px;
+    width: 20vw;
+    margin-left: 0;
+  }
+
+  .img-container {
+    width: 70vw;
+    height: 20vh;
+    border-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  .vote {
+    height: 20vh;
+    width: 60vw;
+    margin-top: 0;
+    margin-left: 4vw;
+  }
+}
+
+@media (max-width: 600px) and (min-width: 501px) {
+  .page-container {
+    width: 90vw;
+  }
+  .login-title {
+    font-size: 25px;
+  }
+  .label-feild {
+    font-size: 16px;
+  }
+  .input-feild {
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  .login-btn {
+    font-size: 2vw;
+  }
+
+  .img-container {
+    width: 40vw;
+  }
+}
+
+@media (max-width: 800px) and (min-width: 601px) {
+  .page-container {
+    width: 90vw;
+  }
+  .login-form {
+    height: 60vh;
+  }
+  .img-container {
+    height: 65vh;
+  }
+  .login-title {
+    font-size: 35px;
+  }
+  .label-feild {
+    font-size: 20px;
+  }
+  .input-feild {
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  .login-btn {
+    font-size: 20px;
+    width: 15vw;
+    margin: 0;
+  }
+
+  .img-container {
+    width: 40vw;
+  }
 }

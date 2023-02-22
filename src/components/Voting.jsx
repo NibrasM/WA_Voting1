@@ -90,7 +90,7 @@ export default function Voting() {
 
   return loggedInUser.type === "admin" && isDone ? (
     <div>
-      <h1 className="thank-msg"> Thank you for voting {loggedInUser.name} </h1>
+      <h3 className="thank-msg"> Thank you for voting {loggedInUser.name} </h3>
       <Admin usersArray={users}></Admin>
     </div>
   ) : !isDone ? (
@@ -111,7 +111,7 @@ export default function Voting() {
           );
         })}
       </div>
-      <div>
+      <div className="btns-div">
         <button
           className="done-btn"
           onClick={done}
@@ -140,7 +140,7 @@ export default function Voting() {
     </div>
   ) : (
     <div className="thanks">
-      <h1 className="thank-msg"> Thank you for voting {loggedInUser.name} </h1>
+      <h3 className="thank-msg"> Thank you for voting {loggedInUser.name} </h3>
     </div>
   );
 }
